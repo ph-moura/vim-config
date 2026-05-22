@@ -49,6 +49,7 @@ hi Function ctermfg=187 ctermbg=NONE cterm=BOLD guifg=#dcdcaa guibg=NONE gui=NON
 
 hi LineNr ctermfg=240 ctermbg=0 cterm=NONE guifg=#5a5a5a guibg=NONE gui=NONE
 
+hi Normal ctermfg=255 ctermbg=0 cterm=NONE guifg=#f8f8f8 guibg=NONE gui=NONE
 " ============================================================================
 " RED
 " ============================================================================
