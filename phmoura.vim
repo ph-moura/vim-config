@@ -1,4 +1,4 @@
-let g:colors_name = "phmoura"
+let g:colors_name = "mycolorscheme"
 set background=dark
 let g:phmoura_termcolors = 256
 set t_Co=256

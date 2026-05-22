@@ -9,7 +9,7 @@ let g:netrw_hide = 1
 
 autocmd FileType netrw setlocal number
 
-let s:comment_map = { 
+let s:comment_map={
     \   "tex": '%',
     \   "plaintex": '%',
     \   "c": '\/\/',
@@ -107,4 +107,4 @@ function! <SID>SynStack()
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-colorscheme phmoura
+colorscheme vsc
