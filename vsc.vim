@@ -1,4 +1,4 @@
-let g:colors_name = "vscode_dark"
+let g:colors_name = "vsc"
 set background=dark
 let g:phmoura_termcolors = 256
 set t_Co=256
@@ -47,9 +47,9 @@ hi Identifier ctermfg=117 ctermbg=NONE cterm=NONE guifg=#9cdcfe guibg=NONE gui=N
 " Function
 hi Function ctermfg=187 ctermbg=NONE cterm=BOLD guifg=#dcdcaa guibg=NONE gui=NONE
 
-hi LineNr ctermfg=240 ctermbg=0 cterm=NONE guifg=#5a5a5a guibg=NONE gui=NONE
+hi LineNr ctermfg=245 ctermbg=234 cterm=NONE guifg=#5a5a5a guibg=NONE gui=NONE
 
-hi Normal ctermfg=255 ctermbg=0 cterm=NONE guifg=#f8f8f8 guibg=NONE gui=NONE
+hi Normal ctermfg=255 ctermbg=233 cterm=NONE guifg=#f8f8f8 guibg=NONE gui=NONE
 " ============================================================================
 " RED
 " ============================================================================
