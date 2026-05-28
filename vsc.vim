@@ -259,3 +259,76 @@ set statusline+=%#StatusLineMode#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%\ \ %l:\ %c
+
+let g:tab_bg_active   = 31
+let g:tab_bg_inactive = 238
+let g:tab_bg_fill     = 236
+
+execute 'hi TabLineSel      ctermfg=252 ctermbg=' . g:tab_bg_active . ' cterm=bold'
+execute 'hi TabLine         ctermfg=250 ctermbg=' . g:tab_bg_inactive . ' cterm=NONE'
+execute 'hi TabLineFill     ctermfg=' . g:tab_bg_fill . ' ctermbg=' . g:tab_bg_fill
+execute 'hi TabModified     ctermfg=203 ctermbg=' . g:tab_bg_active   . ' cterm=bold'
+execute 'hi TabModifiedNC   ctermfg=203 ctermbg=' . g:tab_bg_inactive . ' cterm=bold'
+
+function! s:SepHl(from, to)
+    let name = 'TabSep_' . a:from . '_' . a:to
+    execute 'hi ' . name .
+                \ ' ctermfg=' . a:from .
+                \ ' ctermbg=' . a:to .
+                \ ' cterm=bold'
+    return name
+endfunction
+
+function! MyTabLine()
+    let s = ''
+    let tabs = tabpagenr('$')
+    for i in range(tabs)
+        let tabnr = i + 1
+        let winnr = tabpagewinnr(tabnr)
+        let buflist = tabpagebuflist(tabnr)
+        let bufnr = buflist[winnr - 1]
+        let filename = bufname(bufnr)
+        if empty(filename)
+            let filename = '[No Name]'
+        else
+            let filename = fnamemodify(filename, ':t')
+        endif
+        let modified = getbufvar(bufnr, '&modified')
+        if tabnr == tabpagenr()
+            let current_bg = g:tab_bg_active
+            let current_hl = 'TabLineSel'
+        else
+            let current_bg = g:tab_bg_inactive
+            let current_hl = 'TabLine'
+        endif
+        if tabnr < tabs
+            if (tabnr + 1) == tabpagenr()
+                let next_bg = g:tab_bg_active
+            else
+                let next_bg = g:tab_bg_inactive
+            endif
+        else
+            let next_bg = g:tab_bg_fill
+        endif
+        let s .= '%' . tabnr . 'T'
+        let s .= '%#' . current_hl . '#'
+        let s .= ' ' . tabnr . ': ' . filename . ' '
+        if modified
+            if tabnr == tabpagenr()
+                let s .= '%#TabModified#'
+            else
+                let s .= '%#TabModifiedNC#'
+            endif
+            let s .= '[+] '
+            let s .= '%#' . current_hl . '#'
+        endif
+        let sep_hl = s:SepHl(current_bg, next_bg)
+        let s .= '%#' . sep_hl . '#'
+        let s .= '►'
+    endfor
+    let s .= '%#TabLineFill#%T'
+    return s
+endfunction
+
+set showtabline=2
+set tabline=%!MyTabLine()
